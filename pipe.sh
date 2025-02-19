@@ -27,7 +27,7 @@ function main_menu() {
 
         case $choice in
             1)
-                deploy_pipe_pop
+                deploy_pop
                 ;;
             2)
                 check_status
@@ -54,7 +54,7 @@ function main_menu() {
 }
 
 # Fungsi untuk deploy node pipe pop
-function deploy_pipe_pop() {
+function deploy_pop() {
     # Periksa apakah layanan node DevNet 1 sedang berjalan
     if systemctl is-active --quiet dcdnd.service; then
         echo "Layanan node DevNet 1 sedang berjalan, menghentikan dan menonaktifkannya..."
@@ -115,7 +115,7 @@ function deploy_pipe_pop() {
     read -p "Masukkan alamat Solana: " SOLANA_ADDRESS
 
     # Buat file layanan systemd
-    SERVICE_FILE="/etc/systemd/system/pipe-pop.service"
+    SERVICE_FILE="/etc/systemd/system/pop.service"
     echo "[Unit]
 Description=Pipe POP Node Service
 After=network.target
@@ -143,26 +143,26 @@ WantedBy=multi-user.target" | sudo tee $SERVICE_FILE > /dev/null
     sudo systemctl daemon-reload
 
     # Jalankan layanan dan atur agar berjalan saat boot
-    sudo systemctl start pipe-pop.service
-    sudo systemctl enable pipe-pop.service
+    sudo systemctl start pop.service
+    sudo systemctl enable pop.service
 
     echo "Layanan Pipe POP telah dimulai dan dikonfigurasi untuk berjalan saat boot."
     echo "Gunakan perintah berikut untuk memeriksa status layanan:"
-    echo "  sudo systemctl status pipe-pop.service"
+    echo "  sudo systemctl status pop.service"
     echo "Gunakan perintah berikut untuk menghentikan layanan:"
-    echo "  sudo systemctl stop pipe-pop.service"
+    echo "  sudo systemctl stop pop.service"
     echo "Gunakan perintah berikut untuk me-restart layanan:"
-    echo "  sudo systemctl restart pipe-pop.service"
+    echo "  sudo systemctl restart pop.service"
 
     echo "Sekarang memeriksa status layanan. Tekan 'q' untuk keluar dari tampilan status."
-    sudo systemctl status pipe-pop.service
+    sudo systemctl status pop.service
 
     read -p "Tekan tombol apa saja untuk kembali ke menu utama..."
 }
 
 # Fungsi untuk memeriksa reputasi node
 function check_status() {
-    echo "Memeriksa status ./pop..."
+    echo "Memeriksa status ./pipe..."
     cd /root/pipenetwork
     ./pop --status
     read -p "Tekan tombol apa saja untuk kembali ke menu utama..."
@@ -188,13 +188,13 @@ function generate_referral() {
 # Fungsi untuk upgrade versi
 function upgrade_version() {
     echo "Mengupgrade ke versi 2.0.8..."
-    sudo systemctl stop pipe-pop
+    sudo systemctl stop pop
     sudo rm -f /root/pipenetwork/pop
     wget -O /root/pipenetwork/pop "https://dl.pipecdn.app/v0.2.8/pop"
     sudo chmod +x /root/pipenetwork/pop
     sudo systemctl daemon-reload
-    sudo systemctl restart pipe-pop
-    journalctl -u pipe-pop -f
+    sudo systemctl restart pop
+    journalctl -u pop -f
     read -p "Tekan tombol apa saja untuk kembali ke menu utama..."
 }
 
