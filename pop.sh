@@ -27,7 +27,7 @@ function main_menu() {
 
         case $choice in
             1)
-                deploy_pop
+                deploy_
                 ;;
             2)
                 check_status
