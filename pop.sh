@@ -19,15 +19,14 @@ function main_menu() {
         echo "1. Deploy node pipe pop"
         echo "2. Cek reputasi"
         echo "3. Backup info"
-        echo "4. Buat undangan pop"
-        echo "5. Upgrade versi (disarankan backup info sebelum upgrade)"
-        echo "6. Keluar"
+        echo "4. Upgrade versi (disarankan backup info sebelum upgrade)"
+        echo "5. Keluar"
 
         read -p "Masukkan pilihan Anda: " choice
 
         case $choice in
             1)
-                deploy_
+                deploy_pop
                 ;;
             2)
                 check_status
@@ -36,12 +35,9 @@ function main_menu() {
                 backup_node_info
                 ;;
             4)
-                generate_referral
-                ;;
-            5)
                 upgrade_version
                 ;;
-            6)
+           5)
                 echo "Keluar dari skrip."
                 exit 0
                 ;;
@@ -162,7 +158,7 @@ WantedBy=multi-user.target" | sudo tee $SERVICE_FILE > /dev/null
 
 # Fungsi untuk memeriksa reputasi node
 function check_status() {
-    echo "Memeriksa status ./pipe..."
+    echo "Memeriksa status ./pop..."
     cd /root/pipenetwork
     ./pop --status
     read -p "Tekan tombol apa saja untuk kembali ke menu utama..."
