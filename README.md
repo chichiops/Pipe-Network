@@ -10,11 +10,11 @@ apt install curl iptables build-essential git wget lz4 jq make gcc nano automake
 wget -O pop.sh https://raw.githubusercontent.com/chichiops/Pipe-Network/refs/heads/main/pop.sh
 ```
 ```
-chmod +x pipe.sh
+chmod +x pop.sh
 ```
 ##  Jalankan Skrip
 ```
-./pipe.sh 
+./pop.sh 
 ```
 ## Ikuti Instruksi di Menu Skrip
 Setelah skrip berjalan, Anda akan melihat menu seperti ini:
@@ -30,17 +30,17 @@ Masukkan angka yang sesuai untuk memilih opsi yang diinginkan. Untuk menginstal 
 ## Mengecek Status Node 
 Setelah instalasi selesai, Anda bisa mengecek status node dengan perintah:
 ```
-sudo systemctl status pipe-pop.service
+sudo systemctl status pop.service
 ```
 Jika node berjalan dengan benar, akan terlihat status active (running). Untuk melihat log node secara real-time:
 ```
-journalctl -u pipe-pop -f
+journalctl -u pop -f
 ```
 ## Menghentikan atau Memulai Ulang Node
 ```
-sudo systemctl stop pipe-pop.service
+sudo systemctl stop pop.service
 ```
 Untuk memulai ulang node:
 ```
-sudo systemctl restart pipe-pop.service
+sudo systemctl restart pop.service
 ```
