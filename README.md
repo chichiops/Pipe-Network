@@ -14,7 +14,7 @@ chmod +x pop.sh
 ```
 ##  Jalankan Skrip
 ```
-./pipe.sh #
+./pipe.sh 
 ```
 ## Ikuti Instruksi di Menu Skrip
 Setelah skrip berjalan, Anda akan melihat menu seperti ini:
