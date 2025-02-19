@@ -7,14 +7,12 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Lokasi penyimpanan skrip
-SCRIPT_PATH="$HOME/pipe pop.sh"
+SCRIPT_PATH="$HOME/pop.sh"
 
 # Fungsi menu utama
 function main_menu() {
     while true; do
         clear
-        echo "Skrip ini dibuat oleh komunitas Dadu, Twitter @ferdie_jhovie, open-source gratis, jangan percaya layanan berbayar."
-        echo "Jika ada masalah, hubungi Twitter, hanya ada satu akun ini."
         echo "================================================================"
         echo "Untuk keluar dari skrip, tekan ctrl + C pada keyboard."
         echo "Silakan pilih operasi yang ingin dijalankan:"
@@ -96,9 +94,9 @@ function deploy_pipe_pop() {
     else
         # Gunakan tautan unduhan default dengan curl
         echo "Mencoba mengunduh file dengan curl..."
-        if ! curl -L -o pop "https://dl.pipecdn.app/v0.2.6/pop"; then
+        if ! curl -L -o pop "https://dl.pipecdn.app/v0.2.8/pop"; then
             echo "Unduhan dengan curl gagal, mencoba menggunakan wget..."
-            wget -O pop "https://dl.pipecdn.app/v0.2.6/pop"
+            wget -O pop "https://dl.pipecdn.app/v0.2.8/pop"
         fi
     fi
 
@@ -106,16 +104,6 @@ function deploy_pipe_pop() {
     chmod +x pop
     
     echo "Unduhan selesai, nama file adalah 'pop', izin eksekusi diberikan, dan direktori 'download_cache' dibuat."
-
-    # Minta pengguna memasukkan kode undangan, gunakan default jika tidak dimasukkan
-    read -p "Masukkan kode undangan (default: b06fe87c32aa189): " REFERRAL_CODE
-    REFERRAL_CODE=${REFERRAL_CODE:-b06fe87c32aa189}
-
-    # Tampilkan kode undangan yang digunakan
-    echo "Kode undangan yang digunakan: $REFERRAL_CODE"
-
-    # Jalankan perintah ./pop dengan kode undangan
-    ./pop --signup-by-referral-route $REFERRAL_CODE
 
     # Minta pengguna memasukkan ukuran RAM, disk, dan alamat Solana
     read -p "Masukkan ukuran RAM (default: 4 GB): " MEMORY_SIZE
@@ -134,8 +122,10 @@ After=network.target
 Wants=network-online.target
 
 [Service]
-User=root
-Group=root
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+User=pop-svc-user
+Group=pop-svc-user
 ExecStart=/root/pipenetwork/pop --ram=$MEMORY_SIZE --pubKey $SOLANA_ADDRESS --max-disk $DISK_SIZE --cache-dir /var/cache/pop/download_cache
 Restart=always
 RestartSec=5
@@ -197,10 +187,10 @@ function generate_referral() {
 
 # Fungsi untuk upgrade versi
 function upgrade_version() {
-    echo "Mengupgrade ke versi 2.0.6..."
+    echo "Mengupgrade ke versi 2.0.8..."
     sudo systemctl stop pipe-pop
     sudo rm -f /root/pipenetwork/pop
-    wget -O /root/pipenetwork/pop "https://dl.pipecdn.app/v0.2.6/pop"
+    wget -O /root/pipenetwork/pop "https://dl.pipecdn.app/v0.2.8/pop"
     sudo chmod +x /root/pipenetwork/pop
     sudo systemctl daemon-reload
     sudo systemctl restart pipe-pop
