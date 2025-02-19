@@ -120,8 +120,8 @@ Wants=network-online.target
 [Service]
 AmbientCapabilities=CAP_NET_BIND_SERVICE
 CapabilityBoundingSet=CAP_NET_BIND_SERVICE
-User=pop-svc-user
-Group=pop-svc-user
+User=root
+Group=root
 ExecStart=/root/pipenetwork/pop --ram=$MEMORY_SIZE --pubKey $SOLANA_ADDRESS --max-disk $DISK_SIZE --cache-dir /var/cache/pop/download_cache
 Restart=always
 RestartSec=5
