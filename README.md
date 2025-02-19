@@ -7,7 +7,7 @@ apt install curl iptables build-essential git wget lz4 jq make gcc nano automake
 ## Unduh Skrip dan Beri Izin Eksekusi
 
 ```
-wget -O pipe.sh https://raw.githubusercontent.com/chichiops/Pipe-Network/refs/heads/main/pipe.sh
+wget -O pop.sh https://raw.githubusercontent.com/chichiops/Pipe-Network/refs/heads/main/pop.sh
 ```
 ```
 chmod +x pipe.sh
