@@ -21,9 +21,8 @@ Setelah skrip berjalan, Anda akan melihat menu seperti ini:
 1. Deploy pipe pop node
 2. Cek reputasi
 3. Backup info
-4. Buat undangan pop
-5. Upgrade versi
-6. Keluar
+4. Upgrade versi
+5. Keluar
 
 Masukkan angka yang sesuai untuk memilih opsi yang diinginkan. Untuk menginstal node Pipe POP, pilih 1 dan ikuti instruksi selanjutnya.
 
