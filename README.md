@@ -10,11 +10,11 @@ apt install curl iptables build-essential git wget lz4 jq make gcc nano automake
 wget -O pop.sh https://raw.githubusercontent.com/chichiops/Pipe-Network/refs/heads/main/pipe.sh
 ```
 ```
-chmod +x pop.sh
+chmod +x pipe.sh
 ```
 ##  Jalankan Skrip
 ```
-./pop.sh 
+./pipe.sh 
 ```
 ## Ikuti Instruksi di Menu Skrip
 Setelah skrip berjalan, Anda akan melihat menu seperti ini:
